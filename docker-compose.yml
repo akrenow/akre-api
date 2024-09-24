@@ -1,0 +1,13 @@
+version: "3"
+services:
+  my-app:
+    container_name: ${DOCKER_CONTAINER_NAME}
+    restart: always
+    build: .
+    volumes:
+      - .:/App
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    image: ${DOCKER_CONTAINER_NAME}:1.0
