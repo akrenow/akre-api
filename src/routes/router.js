@@ -1,5 +1,6 @@
 const express = require("express");
 const script = require("../controllers/script");
+const userRouter = require("./usersRouter");
 const router = express.Router();
 
 router.get("/api/", (req, res) => {
@@ -7,5 +8,7 @@ router.get("/api/", (req, res) => {
 });
 router.post("/api/script", script);
 
+// Add users route
+router.use("/api/users", userRouter);
+
 module.exports = router;
-//akre
