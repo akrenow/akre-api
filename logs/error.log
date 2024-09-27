@@ -1,0 +1,139 @@
+2024-09-27 12:11:05 error: uncaughtException: ccc is not defined
+ReferenceError: ccc is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:26:3)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+2024-09-27 13:41:05 error: uncaughtException: Cannot find module 'multer-gridfs-storage'
+Require stack:
+- F:\Akre\akre-api\src\routes\gridFsStorage.js
+- F:\Akre\akre-api\index.js
+Error: Cannot find module 'multer-gridfs-storage'
+Require stack:
+- F:\Akre\akre-api\src\routes\gridFsStorage.js
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\src\routes\gridFsStorage.js:3:27)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+2024-09-27 13:42:10 error: uncaughtException: conn is not defined
+ReferenceError: conn is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:40:1)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+2024-09-27 13:56:02 error: uncaughtException: Cannot read properties of undefined (reading '_id')
+TypeError: Cannot read properties of undefined (reading '_id')
+    at GridFSBucketWriteStream.emitFile (F:\Akre\akre-api\node_modules\multer-gridfs-storage\lib\gridfs.js:306:31)
+    at GridFSBucketWriteStream.emit (node:events:538:35)
+    at finish (node:internal/streams/writable:754:10)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+2024-09-27 14:02:30 error: uncaughtException: Cannot read properties of undefined (reading '_id')
+TypeError: Cannot read properties of undefined (reading '_id')
+    at GridFSBucketWriteStream.emitFile (F:\Akre\akre-api\node_modules\multer-gridfs-storage\lib\gridfs.js:306:31)
+    at GridFSBucketWriteStream.emit (node:events:538:35)
+    at finish (node:internal/streams/writable:754:10)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+2024-09-27 14:04:57 error: uncaughtException: Cannot read properties of undefined (reading '_id')
+TypeError: Cannot read properties of undefined (reading '_id')
+    at GridFSBucketWriteStream.emitFile (F:\Akre\akre-api\node_modules\multer-gridfs-storage\lib\gridfs.js:306:31)
+    at GridFSBucketWriteStream.emit (node:events:538:35)
+    at finish (node:internal/streams/writable:754:10)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+2024-09-27 14:06:55 error: uncaughtException: methodOverride is not defined
+ReferenceError: methodOverride is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:62:5)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+2024-09-27 14:08:57 error: uncaughtException: methodOverride is not defined
+ReferenceError: methodOverride is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:62:5)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+2024-09-27 14:10:28 error: uncaughtException: methodOverride is not defined
+ReferenceError: methodOverride is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:62:5)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+2024-09-27 14:17:55 error: uncaughtException: app is not defined
+ReferenceError: app is not defined
+    at Object.<anonymous> (F:\Akre\akre-api\src\routes\router.js:13:1)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:7:20)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+2024-09-27 14:21:24 error: uncaughtException: Cannot find module './src/routes/gridFsStorage'
+Require stack:
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+Error: Cannot find module './src/routes/gridFsStorage'
+Require stack:
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\src\routes\propertyRoutes.js:4:16)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+2024-09-27 14:22:54 error: uncaughtException: Cannot find module './src/routes/gridFsStorage'
+Require stack:
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+Error: Cannot find module './src/routes/gridFsStorage'
+Require stack:
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\src\routes\propertyRoutes.js:4:16)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+2024-09-27 14:24:55 error: uncaughtException: Cannot read properties of undefined (reading '_id')
+TypeError: Cannot read properties of undefined (reading '_id')
+    at GridFSBucketWriteStream.emitFile (F:\Akre\akre-api\node_modules\multer-gridfs-storage\lib\gridfs.js:306:31)
+    at GridFSBucketWriteStream.emit (node:events:538:35)
+    at finish (node:internal/streams/writable:754:10)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
