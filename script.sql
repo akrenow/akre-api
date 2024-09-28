@@ -1,4 +1,4 @@
--- CREATE DATABASE IF NOT EXISTS users;
+-- CREATE DATABASE IF NOT EXISTS happiness_index;
 
 -- Create table 'users'
 CREATE TABLE IF NOT EXISTS users (

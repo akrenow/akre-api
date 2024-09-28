@@ -1,5 +1,6 @@
 const express = require("express");
 const script = require("../controllers/script");
+const userRouter = require("./usersRouter");
 const router = express.Router();
 const propertyRoutes = require("../routes/propertyRoutes");
 
@@ -14,4 +15,3 @@ router.post("/api/script", script);
 router.use("/api/", propertyRoutes);
 
 module.exports = router;
-//akre
