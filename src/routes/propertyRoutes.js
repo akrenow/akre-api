@@ -7,7 +7,8 @@ const createproperty = require("../controllers/Property/createproperty");
 const getpropertybyid = require("../controllers/Property/GetpropertybyID");
 const updateproperties = require("../controllers/Property/Updateproperty");
 const deleteproperty = require("../controllers/Property/deleteproperty");
-
+const getfile = require("../controllers/Property/getfile");
+const uploadfile = require("../controllers/Property/uploadfile");
 
 // Create a new property
 router.post("/properties",createproperty);
@@ -26,35 +27,9 @@ router.delete("/properties/:id",deleteproperty);
 
 
 // Route to get file (image/video) by filename
-router.get("/file/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    if (!file || file.length === 0) {
-      return res.status(404).json({ err: "No file exists" });
-    }
-
-    // Check if file is an image or video
-    if (
-      file.contentType === "image/jpeg" ||
-      file.contentType === "image/png" ||
-      file.contentType === "video/mp4"
-    ) {
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({ err: "Not an image or video file" });
-    }
-  });
-});
+router.get("/file/:filename", getfile);
 
 // Route to upload images and videos
-router.post("/upload", upload.single("file"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded." });
-  }
-
-  // Log the uploaded file details for debugging
-  console.log(req.file);
-  res.json({ file: req.file });
-});
+router.post("/upload", upload.single("file"),uploadfile);
 
 module.exports = router;

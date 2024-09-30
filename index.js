@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const mainRouter = require("./src/routes/router");
 const Grid = require("gridfs-stream");
-
+const { GridFSBucket } = require("mongodb");
 dotenv.config();
 
 const app = express();
@@ -32,14 +32,20 @@ mongoose
     console.error("Connection error", err);
   });
 
-const conn = mongoose.connection;
 
-// Init gfs for GridFS
-let gfs;
-conn.once("open", () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection("uploads"); // Files will be stored in 'uploads' collection
-});
+  const conn = mongoose.connection;
+
+  // Initialize GridFS Bucket
+  let gfsBucket;
+  conn.once("open", () => {
+    console.log("MongoDB connected");
+    // Creating a new bucket called 'mycustombucket'
+    gfsBucket = new GridFSBucket(conn.db, {
+      bucketName: "mycustombucket", // Custom bucket name
+    });
+  });
+
+
 
 app.use("/", mainRouter);
 
