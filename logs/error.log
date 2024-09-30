@@ -137,3 +137,63 @@ TypeError: Cannot read properties of undefined (reading '_id')
     at GridFSBucketWriteStream.emit (node:events:538:35)
     at finish (node:internal/streams/writable:754:10)
     at processTicksAndRejections (node:internal/process/task_queues:83:21)
+2024-09-30 14:28:11 error: uncaughtException: Cannot find module 'bcrypt'
+Require stack:
+- F:\Akre\akre-api\src\controllers\users\login.js
+- F:\Akre\akre-api\src\routes\usersRouter.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+Error: Cannot find module 'bcrypt'
+Require stack:
+- F:\Akre\akre-api\src\controllers\users\login.js
+- F:\Akre\akre-api\src\routes\usersRouter.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\src\controllers\users\login.js:1:16)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+2024-09-30 14:30:15 error: uncaughtException: Cannot find module 'gridfs-stream'
+Require stack:
+- F:\Akre\akre-api\index.js
+Error: Cannot find module 'gridfs-stream'
+Require stack:
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\index.js:8:14)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+2024-09-30 14:40:23 error: uncaughtException: Cannot find module '../Models/Property'
+Require stack:
+- F:\Akre\akre-api\src\controllers\Property\Getproperties.js
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+Error: Cannot find module '../Models/Property'
+Require stack:
+- F:\Akre\akre-api\src\controllers\Property\Getproperties.js
+- F:\Akre\akre-api\src\routes\propertyRoutes.js
+- F:\Akre\akre-api\src\routes\router.js
+- F:\Akre\akre-api\index.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (F:\Akre\akre-api\src\controllers\Property\Getproperties.js:1:18)
+    at Module._compile (node:internal/modules/cjs/loader:1103:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1157:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)

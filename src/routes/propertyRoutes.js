@@ -2,68 +2,28 @@ const express = require("express");
 const router = express.Router();
 const Property = require("../Models/Property");
 const upload = require("./gridFsStorage"); // Import GridFS storage setup
+const getproperties = require("../controllers/Property/Getproperties");
+const createproperty = require("../controllers/Property/createproperty");
+const getpropertybyid = require("../controllers/Property/GetpropertybyID");
+const updateproperties = require("../controllers/Property/Updateproperty");
+const deleteproperty = require("../controllers/Property/deleteproperty");
+
 
 // Create a new property
-router.post("/properties", async (req, res) => {
-  try {
-    const property = new Property(req.body);
-    await property.save();
-    res.status(201).json(property);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
+router.post("/properties",createproperty);
 
 // Get all properties
-router.get("/properties", async (req, res) => {
-  try {
-    const properties = await Property.find();
-    res.json(properties);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+router.get("/properties",getproperties);
 
 // Get a property by ID
-router.get("/properties/:id", async (req, res) => {
-  try {
-    const property = await Property.findById(req.params.id);
-    if (!property) {
-      return res.status(404).json({ message: "Property not found" });
-    }
-    res.json(property);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+router.get("/properties/:id",getpropertybyid);
 
 // Update a property
-router.put("/properties/:id", async (req, res) => {
-  try {
-    const property = await Property.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!property) {
-      return res.status(404).json({ message: "Property not found" });
-    }
-    res.json(property);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
+router.put("/properties/:id",updateproperties);
 
 // Delete a property
-router.delete("/properties/:id", async (req, res) => {
-  try {
-    const property = await Property.findByIdAndDelete(req.params.id);
-    if (!property) {
-      return res.status(404).json({ message: "Property not found" });
-    }
-    res.json({ message: "Property deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+router.delete("/properties/:id",deleteproperty);
+
 
 // Route to get file (image/video) by filename
 router.get("/file/:filename", (req, res) => {
