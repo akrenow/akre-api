@@ -1,13 +1,9 @@
-const bcrypt = require("bcrypt");
 const { SUCCESS_CODE, INTERNAL_SERVER_ERROR_CODE, BAD_REQUEST_CODE } = require("../../utils/statusCodes");
-const { createUser, checkEmailExists } = require("../../databaseconfig/queries");
 const { REGISTRATION_SUCCESS, EMAIL_EXISTS } = require("../../utils/strings");
-const { pool } = require("../../databaseconfig/databaseconnection");
 const { validateEmail, validatePhoneNumber } = require("../../helpers/user");
-
+const User = require("../../Models/Users");
 
 const register = async (req, res) => {
-  let client;
   const { name, email, phone_number, password, user_type, profile_picture } = req.body;
 
   if (!name || !email || !password || !user_type) {
@@ -29,29 +25,32 @@ const register = async (req, res) => {
   }
 
   try {
-     client = await pool.connect();
     // Check if email already exists
-    const emailCheckQuery = await client.query(await checkEmailExists(email));
-    if (emailCheckQuery.rows.length > 0) {
+    const emailExists = await User.findOne({ email });
+    if (emailExists) {
       return res.status(BAD_REQUEST_CODE).json({ success: false, message: EMAIL_EXISTS });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Create and save the new user
+    const user = new User({
+      name,
+      email,
+      phone_number,
+      password, // Password will be hashed automatically by the pre-save hook
+      user_type,
+      profile_picture
+    });
+    const savedUser = await user.save();
 
-    // Create the user
-    const result = await client.query(
-     await createUser(name, email, phone_number, hashedPassword, user_type, profile_picture)
-    );
+    res.status(SUCCESS_CODE).json({ success: true, message: REGISTRATION_SUCCESS, data: savedUser });
 
-    res.status(SUCCESS_CODE).json({success: true,message: REGISTRATION_SUCCESS,data: result.rows[0]});
-    
   } catch (err) {
+    if (err.name === 'ValidationError') {
+      const errors = Object.keys(err.errors).map(key => err.errors[key].message);
+      return res.status(BAD_REQUEST_CODE).json({ success: false, message: errors });
+    }
     console.error(err);
     res.status(INTERNAL_SERVER_ERROR_CODE).json({ success: false, message: "Server error" });
-  } finally  {
-    if (client) client.release();
-
   }
 };
 

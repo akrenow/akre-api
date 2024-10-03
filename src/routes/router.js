@@ -10,6 +10,7 @@ router.get("/api/", (req, res) => {
 
 router.post("/api/script", script);
 
+router.use("/api/users", userRouter);
 
 //Property_Listing
 router.use("/api/", propertyRoutes);

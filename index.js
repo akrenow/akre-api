@@ -2,11 +2,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const mainRouter = require("./src/routes/router");
-const Grid = require("gridfs-stream");
-const { GridFSBucket } = require("mongodb");
+const { db_connection } = require("./src/databaseconfig/databaseconnection");
+
 dotenv.config();
 
 const app = express();
@@ -16,7 +15,10 @@ app.use(
     origin: "*",
   })
 );
+
 const port = process.env.PORT || 8000;
+
+db_connection();
 
 app.use("/", mainRouter);
 

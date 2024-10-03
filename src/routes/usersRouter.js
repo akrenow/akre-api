@@ -10,7 +10,7 @@ const userRouter = express.Router();
 userRouter.post("/register", register);
 userRouter.post("/login", login);
 userRouter.get("/:id", getUserByIdController);
-userRouter.put("/:id", updateUserController);
-userRouter.delete("/:id", deleteUserController);
+userRouter.put("/", updateUserController);
+userRouter.delete("/", deleteUserController);
 
 module.exports = userRouter;

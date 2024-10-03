@@ -1,56 +1,45 @@
-const { Pool } = require("pg");
-const dotenv = require("dotenv");
-const Logger = require("../utils/logger");
 const mongoose = require("mongoose");
-const { GridFSBucket } = require("mongodb");
+const Grid = require("gridfs-stream");
 
-dotenv.config();
+let gfs;
 
-//Database configuration
-const pool = new Pool({
-  user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DB,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRES_PORT,
-});
-
-pool.on("connect", () => {
-  Logger.info("connected to the postgres");
-});
-
-pool.on("error", () => {
-  Logger.info("error occured");
-});
-pool.on("release", () => {
-  Logger.info("client released");
-});
-
-module.exports = { pool };
-
-
-//database connection mongodb
-mongoose
-  .connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-  });
-
-
-  const conn = mongoose.connection;
-
-  // Initialize GridFS Bucket
-  let gfsBucket;
-  conn.once("open", () => {
-    console.log("MongoDB connected");
-    // Creating a new bucket called 'mycustombucket'
-    gfsBucket = new GridFSBucket(conn.db, {
-      bucketName: "mycustombucket", // Custom bucket name
+const db_connection = async () => {
+  try {
+    // Initiate connection to MongoDB
+    await mongoose.connect(process.env.DB_URI, {}).then(() => {
+      console.log("Database connected successfully.");
     });
-  });
+
+    const db = mongoose.connection;
+
+    // Handle MongoDB connection events
+    db.on("error", (err) => {
+      console.error("MongoDB connection error:", err);
+    });
+
+    db.on("disconnected", () => {
+      console.log("MongoDB connection disconnected");
+    });
+
+    // Initialize GridFS when connection is open
+    db.once("open", () => {
+      gfs = Grid(db.db, mongoose.mongo);
+      gfs.collection("uploads"); // Files will be stored in 'uploads' collection
+      console.log("GridFS initialized");
+    });
+  } catch (err) {
+    console.error(
+      "An error occurred during the MongoDB connection setup:",
+      err
+    );
+  }
+};
+
+// Gracefully handle shutdown and close MongoDB connection
+process.on("SIGINT", async () => {
+  await mongoose.connection.close();
+  console.log("MongoDB connection closed due to application termination");
+  process.exit(0);
+});
+
+module.exports = { db_connection, gfs };
