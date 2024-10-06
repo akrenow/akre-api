@@ -40,8 +40,8 @@ const userSchema = new mongoose.Schema({
   user_type: {
     type: String,
     required: [true, "User type is required"],
-    enum: ["Buyer", "Seller", "Agent"],
-    message: "User type must be either Buyer, Seller, or Agent",
+    enum: ["Buyer", "Seller"],
+    message: "User type must be either Buyer, Seller",
   },
   registration_date: {
     type: Date,
