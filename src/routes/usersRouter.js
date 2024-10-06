@@ -7,8 +7,12 @@ const register = require("../controllers/users/register");
 
 const userRouter = express.Router();
 
+
+//Auth
 userRouter.post("/register", register);
 userRouter.post("/login", login);
+
+//User
 userRouter.get("/:id", getUserByIdController);
 userRouter.put("/", updateUserController);
 userRouter.delete("/", deleteUserController);
