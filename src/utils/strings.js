@@ -14,3 +14,4 @@ exports.MISSING_REQUIRED_FIELDS ="Missing required fields."
 exports.PROPERTY_NOT_FOUND="Property not found."
 exports.PROPERTY_DELETED_SUCCESS ="Property deleted successfully."
 exports.PROPERTY_UPDATED_SUCCESS ="Property updated successfully."
+exports.OTP_EXPIRED = "OTP has expired. Please request a new one.";
