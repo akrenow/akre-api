@@ -3,12 +3,11 @@ const createPropertyController = require("../controllers/Property/create");
 const getAllProperties = require("../controllers/Property/getProperty");
 const deletePropertyController = require("../controllers/Property/delete");
 const updatePropertyController = require("../controllers/Property/update");
-
+const upload = require("../middleware/upload");
 
 const propertyRouter = express.Router();
 
-// Create a new property
-propertyRouter.post("/", createPropertyController);
+propertyRouter.post("/", upload.array("media", 10), createPropertyController); // Up to 10 files can be uploaded
 
 propertyRouter.get("/", getAllProperties);
 

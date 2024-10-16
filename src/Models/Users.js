@@ -51,6 +51,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  lastLogin: {
+    type: Date,
+    default: Date.now,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  resetPasswordToken: String,
+  resetPasswordExpiresAt: Date,
+  otp: String,
+  otpExpiresAt: Date,
 });
 
 // Pre-save hook to hash the password before saving the user
