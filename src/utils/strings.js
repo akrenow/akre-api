@@ -1,5 +1,6 @@
   //users.js
-exports.EMAIL_EXISTS = "The email address is already registered.";
+exports.EMAIL_EXISTS = "The email address is already registered, OTP sent to your email. Please verify";
+exports.NEW_OTP_SENT= "A new OTP has been sent to your email. Please check your inbox.",
 exports.REGISTRATION_SUCCESS = "User registered successfully.";
 exports.USER_NOT_FOUND = "User not found.";
 exports.LOGIN_SUCCESS = "Login successful.";
@@ -15,3 +16,4 @@ exports.PROPERTY_NOT_FOUND="Property not found."
 exports.PROPERTY_DELETED_SUCCESS ="Property deleted successfully."
 exports.PROPERTY_UPDATED_SUCCESS ="Property updated successfully."
 exports.OTP_EXPIRED = "OTP has expired. Please request a new one.";
+exports.USER_ALREADY_VERIFIED = "User is already verified.";

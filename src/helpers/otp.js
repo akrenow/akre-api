@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
-const generateOtp = () => {
-  const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate 6-digit OTP
+const generateOtp = async () => {
+  const otp = await Math.floor(100000 + Math.random() * 900000).toString(); // Generate 6-digit OTP
   return otp;
 };
 
