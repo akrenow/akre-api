@@ -59,6 +59,8 @@ const verifyOtpAndLogin = async (req, res) => {
     }
 
     user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpiresAt = undefined;
     await user.save();
 
     // Generate JWT token
