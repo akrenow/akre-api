@@ -34,7 +34,7 @@ const register = async (req, res) => {
         return res.status(SUCCESS_CODE).json({ success: true, message: NEW_OTP_SENT });
       } else {
         // OTP is still valid
-        return res.status(SUCCESS_CODE).json({ success: false, message: EMAIL_EXISTS });
+        return res.status(SUCCESS_CODE).json({ success: true, message: EMAIL_EXISTS });
       }
     } else {
       // Create and save the new user
