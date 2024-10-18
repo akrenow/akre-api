@@ -1,14 +1,26 @@
-const { CREATED_CODE, INTERNAL_SERVER_ERROR_CODE, BAD_REQUEST_CODE, SUCCESS_CODE } = require("../../utils/statusCodes");
-const { EMAIL_EXISTS, OTP_EXPIRED, NEW_OTP_SENT } = require("../../utils/strings");
+const {
+  CREATED_CODE,
+  INTERNAL_SERVER_ERROR_CODE,
+  BAD_REQUEST_CODE,
+  SUCCESS_CODE,
+} = require("../../utils/statusCodes");
+const {
+  EMAIL_EXISTS,
+  OTP_EXPIRED,
+  NEW_OTP_SENT,
+} = require("../../utils/strings");
 const { generateOtp } = require("../../helpers/otp");
 const User = require("../../Models/Users");
 const { sendVerificationEmail } = require("../../helpers/email/emails");
 
 const register = async (req, res) => {
-  const { name, email, phone_number, password, user_type, profile_picture } = req.body;
+  const { name, email, phone_number, password, user_type, profile_picture } =
+    req.body;
 
   if (!name || !email || !password) {
-    return res.status(BAD_REQUEST_CODE).json({ success: false, message: "Missing required fields" });
+    return res
+      .status(BAD_REQUEST_CODE)
+      .json({ success: false, message: "Missing required fields" });
   }
 
   try {
@@ -18,9 +30,11 @@ const register = async (req, res) => {
     if (emailExists) {
       // Check if the user is already verified
       if (emailExists.isVerified) {
-        return res.status(SUCCESS_CODE).json({ success: false, message: "This email is already verified." });
+        return res
+          .status(SUCCESS_CODE)
+          .json({ success: false, message: "This email is already verified." });
       }
-      
+
       // Check if OTP has expired
       if (emailExists?.otpExpiresAt && Date.now() > emailExists?.otpExpiresAt) {
         // OTP expired, generate a new one
@@ -31,10 +45,14 @@ const register = async (req, res) => {
 
         // Send new OTP to the user's email
         await sendVerificationEmail(email, newOtp);
-        return res.status(SUCCESS_CODE).json({ success: true, message: NEW_OTP_SENT });
+        return res
+          .status(SUCCESS_CODE)
+          .json({ success: true, message: NEW_OTP_SENT });
       } else {
         // OTP is still valid
-        return res.status(SUCCESS_CODE).json({ success: true, message: EMAIL_EXISTS });
+        return res
+          .status(SUCCESS_CODE)
+          .json({ success: true, message: EMAIL_EXISTS });
       }
     } else {
       // Create and save the new user
@@ -53,11 +71,20 @@ const register = async (req, res) => {
 
       // Send OTP to user email
       await sendVerificationEmail(email, otp);
-      return res.status(CREATED_CODE).json({ success: true, message: "OTP sent to your email. Please verify." });
+      return res.status(CREATED_CODE).json({
+        success: true,
+        message: "OTP sent to your email. Please verify.",
+      });
     }
   } catch (err) {
-    console.error(err);
-    res.status(INTERNAL_SERVER_ERROR_CODE).json({ success: false, message: err.message });
+    console.log(err.message);
+    if (err.name === 'ValidationError') {
+      const errors = Object.keys(err.errors).map(key => err.errors[key].message);
+      return res.status(BAD_REQUEST_CODE).json({ success: false, message: errors });
+    }
+    res
+      .status(INTERNAL_SERVER_ERROR_CODE)
+      .json({ success: false, message: err.message });
   }
 };
 

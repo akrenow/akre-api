@@ -49,7 +49,7 @@ const resetPassword = async (req, res) => {
     console.error("Error in resetPassword:", error);
     return res
       .status(INTERNAL_SERVER_ERROR_CODE)
-      .json({ success: false, message: "Server error" });
+      .json({ success: false, message: error.message || "Server error" });
   }
 };
 
