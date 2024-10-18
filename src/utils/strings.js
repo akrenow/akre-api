@@ -17,3 +17,6 @@ exports.PROPERTY_DELETED_SUCCESS ="Property deleted successfully."
 exports.PROPERTY_UPDATED_SUCCESS ="Property updated successfully."
 exports.OTP_EXPIRED = "OTP has expired. Please request a new one.";
 exports.USER_ALREADY_VERIFIED = "User is already verified.";
+exports.RESET_PASSWORD_EMAIL_SENT = "Password reset email sent. Please check your inbox.";
+exports.INVALID_OR_EXPIRED_TOKEN = "Invalid or expired reset token.";
+exports.PASSWORD_RESET_SUCCESSFUL = "Password reset successful.";
