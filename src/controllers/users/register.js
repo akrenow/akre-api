@@ -77,8 +77,8 @@ const register = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err.message);
-    if (err.name === 'ValidationError') {
+    console.log(err?.message);
+    if (err?.name === 'ValidationError') {
       const errors = Object.keys(err.errors).map(key => err.errors[key].message);
       return res.status(BAD_REQUEST_CODE).json({ success: false, message: errors });
     }

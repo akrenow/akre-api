@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const deleteUserController = async (req, res) => {
   // Extract user ID from the token
-  const token = req.headers.authorization?.split(" ")[1]; // Assuming Bearer token
+  const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res.status(BAD_REQUEST_CODE).json({ success: false, message: "Token is required." });
   }

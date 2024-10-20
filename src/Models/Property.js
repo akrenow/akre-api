@@ -1,106 +1,105 @@
 const mongoose = require("mongoose");
 
-
 const propertySchema = new mongoose.Schema({
   seller: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Seller", // Reference to the Seller model
+    ref: "Seller",
     required: true,
   },
-  land_media: [
+  media: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "LandMedia", // Reference to the LandMedia model
-      required: true,
-    }
-  ],  
+      media_type: { type: String, enum: ["image", "video"], required: true }, // Image or video
+      file_id: { type: mongoose.Schema.Types.ObjectId, required: true }, // GridFS file ID
+      filename: { type: String, required: true }, // File name
+    },
+  ],
   division_info: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Division", // Reference to the Division model
+      ref: "Division",
     },
   ],
   property_type: {
     type: String,
-    enum: ["land", "plot"],
+    enum: ["land", "plot", "house", "apartment"],
     default: "land",
   },
-  land_bookmark_data: [
-    {
-      id: { type: Number, required: true }, // Bookmark ID
-      akre_premium: { type: Boolean, default: false }, // Premium land flag
-      chance: { type: Boolean, default: false }, // Chance of availability
-      site_verification: { type: Boolean, default: false }, // Site verified or not
-      investors: { type: Boolean, default: false }, // Investor interest
-    },
-  ],
-  water_source_data: [
-    {
-      id: { type: Number, required: true }, // Water source ID
-      well: { type: Boolean, default: false }, // Well water available
-      canal: { type: Boolean, default: false }, // Canal water available
-      drip: { type: Boolean, default: false }, // Drip irrigation present
-      sprinkler: { type: Boolean, default: false }, // Sprinkler irrigation present
-      bore_well: { type: Boolean, default: false }, // Borewell present
-      stream: { type: Boolean, default: false }, // Stream water available
-    },
-  ],
   created_by: {
-    id: { type: Number, required: true }, // Creator ID 
-    name: { type: String, required: true }, // Creator name
+    id: { type: Number },
+    name: { type: String },
   },
-  is_shortlisted: { type: Boolean, default: false }, // If property is shortlisted
-  is_basic_verified: { type: Boolean, default: true }, // Basic verification status
-  total_land_size_in_acres: {
-    acres: { type: Number, required: true }, // Total size in acres
+  is_shortlisted: { type: Boolean, default: false },
+  price_per_acre: { type: Number, default: 0, required: true },
+  total_price: { type: Number, required: true },
+  general_info: {
+    patadhar_name: { type: String, default: null }, // Patadhar (landowner) name
+    survey_number: { type: String, default: null },
+    hissa_number: { type: String, default: null },
+    extent: { type: Number, default: null }, // Size or extent of the property
+    owner_mobile_number: { type: String, default: null },
+    land_mark: { type: String, default: null },
   },
-  price_per_acre_crore: {
-    crore: { type: Number, default: 0 }, // Price in crores per acre
-    lakh: { type: Number, default: 0 }, // Price in lakhs per acre
+
+  // House-specific fields
+  house_info: {
+    house_no: { type: String, default: null },
+    house_type_bhk: { type: String, default: null },
+    sq_feet: { type: Number, default: null },
   },
-  slug: { type: String, required: true }, // Slug for the property URL
-  total_price: { type: Number, required: true }, // Total price of the property
-  price_per_acre: { type: Number, required: true }, // Price per acre
-  lat: { type: String }, //optional //Latitude of the property
-  long: { type: String },//optional // Longitude of the property
+
+  // Apartment-specific fields
+  apartment_info: {
+    flat_no: { type: String, default: null },
+    apartment_name: { type: String, default: null },
+    floor: { type: Number, default: null },
+    sq_feet: { type: Number, default: null },
+  },
+
+  // Property Location
+  lat: { type: String },
+  long: { type: String },
+  location_link: { type: String, default: null },
+
+  // Property Status
   status: {
     type: String,
     enum: ["active", "sold", "inactive"],
     default: "active",
-  }, // Property status
+  },
+
   verification_status: {
     type: String,
     enum: ["pending", "approved", "rejected"],
     default: "pending",
-  }, // Verification status
-  is_physically_verified: { type: Boolean, default: false }, // Physical verification status
-  approach_road: { type: Boolean, default: true }, // Presence of approach road
-  fencing: { type: Boolean, default: false }, // Whether the property is fenced
-  soil_type: {
-    type: String,
-    enum: ["Black", "Red", "Loamy"],
-    default: "Black",
-  }, // Type of soil
-  crop_type: { type: String, default: null }, // Type of crop grown on the land
-  created_at: { type: Date, default: Date.now }, // Creation date
-  updated_at: { type: Date, default: Date.now }, // Last update date
-  distance_from_highway: { type: Number }, // Distance from the nearest highway (in km)
-  approach_road_length: { type: Number, default: 0 }, // Length of the approach road in meters
+  },
+  is_physically_verified: { type: Boolean, default: false },
+
+  // Additional Details
+  approach_road: { type: Boolean, default: true },
+  approach_road_length: { type: Number, default: null },
   approach_road_type: {
     type: String,
-    enum: ["blacktop", "gravel", "mud"],
-    default: "blacktop",
+    default: null,
   }, // Type of approach road
-  fencing_description: { type: String, default: "" }, // Description of the fencing (if any)
-  location_link: { type: String, default: "" }, // Google Maps link to the location
-  survey_number: { type: String, default: "" }, // Survey number of the land
-  electricity: { type: Boolean, default: false }, // Whether electricity is available
+  fencing: { type: Boolean, default: false },
+  fencing_description: { type: String, default: null },
+  soil_type: {
+    type: String,
+    default: null,
+  }, // Type of soil
+  crop_type: { type: String, default: null },
+  electricity: { type: Boolean, default: false },
   existing_structure: { type: String, default: null }, // Description of existing structures (if any)
-  additional_info: { type: String, default: null }, // Additional information
+  additional_info: { type: String, default: null },
   tags: { type: [String], default: [] }, // Tags for searchability
+
+  // Metadata
+  slug: { type: String }, // Slug for the property URL
+  created_at: { type: Date, default: Date.now }, // Creation date
+  updated_at: { type: Date, default: Date.now }, // Last update date
 });
 
 // Create a Mongoose model
 const Property = mongoose.model("Property", propertySchema);
 
-module.exports = Property; 
+module.exports = Property;

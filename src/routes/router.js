@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = require("./usersRouter");
 const propertyRouter = require("./propertyRouter");
+const mediaRouter = require("./mediaRouter");
 const router = express.Router();
 
 router.get("/api/", (req, res) => {
@@ -12,5 +13,8 @@ router.use("/api/users", userRouter);
 
 // Property routes
 router.use("/api/properties", propertyRouter);
+
+//Media Routes
+router.use("/api/media", mediaRouter);
 
 module.exports = router;

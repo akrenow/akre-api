@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (phone_number) {
-        // Phone number validation (assuming international format)
         return /^\+?[1-9]\d{1,14}$/.test(phone_number);
       },
       message: "Invalid phone number format",
