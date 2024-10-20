@@ -5,14 +5,12 @@ let gfs;
 
 const db_connection = async () => {
   try {
-    // Initiate connection to MongoDB
-    await mongoose.connect(process.env.DB_URI, {}).then(() => {
-      console.log("Database connected successfully.");
-    });
+    // Connect to MongoDB with the correct connection string
+    await mongoose.connect(process.env.DB_URI);
+    console.log("Database connected successfully.");
 
     const db = mongoose.connection;
 
-    // Handle MongoDB connection events
     db.on("error", (err) => {
       console.error("MongoDB connection error:", err);
     });
@@ -35,7 +33,7 @@ const db_connection = async () => {
   }
 };
 
-// Gracefully handle shutdown and close MongoDB connection
+// Graceful shutdown handling
 process.on("SIGINT", async () => {
   await mongoose.connection.close();
   console.log("MongoDB connection closed due to application termination");

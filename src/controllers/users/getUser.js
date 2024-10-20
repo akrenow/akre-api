@@ -8,7 +8,7 @@ const { USER_NOT_FOUND } = require("../../utils/strings");
 const jwt = require("jsonwebtoken");
 
 const getUserByIdController = async (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1]; // Assuming Bearer token
+  const token = req.headers.authorization?.split(" ")[1]; 
   if (!token) {
     return res.status(BAD_REQUEST_CODE).json({ success: false, message: "Token is required." });
   }

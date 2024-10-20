@@ -1,5 +1,5 @@
+const { deleteMediaFiles } = require("../../helpers/manageMedia");
 const Property = require("../../Models/Property");
-const LandMedia = require("../../Models/LandMedia");
 const Seller = require("../../Models/Seller");
 const {
   SUCCESS_CODE,
@@ -30,10 +30,11 @@ const deletePropertyController = async (req, res) => {
     }
 
     // Log the property ID for debugging
-    console.log(`Deleting LandMedia associated with property ID: ${property._id}`);
+    console.log(`Deleting media associated with property ID: ${property._id}`);
 
-    // Delete related land media
-    await LandMedia.deleteMany({ property_id: property._id });
+    // Delete media files associated with the property
+    const mediaIds = property.media.map(media => media.file_id); // Extract file IDs from media
+    await deleteMediaFiles(mediaIds); // Assuming deleteMediaFiles is a function that handles the deletion of media files
 
     // Update seller info if necessary
     const seller = await Seller.findById(property.seller);

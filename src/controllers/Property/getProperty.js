@@ -1,43 +1,46 @@
 const Property = require("../../Models/Property");
-const { SUCCESS_CODE, BAD_REQUEST_CODE, INTERNAL_SERVER_ERROR_CODE } = require("../../utils/statusCodes");
-const { PROPERTY_NOT_FOUND } = require("../../utils/strings");
+const {
+  SUCCESS_CODE,
+  INTERNAL_SERVER_ERROR_CODE,
+} = require("../../utils/statusCodes");
 
 const getAllProperties = async (req, res) => {
   try {
-    // Extract query parameters for pagination and filtering
     const { page = 1, limit = 10, ...filters } = req.query;
-
-    // Build query object based on filters
     const query = {};
 
-    // Example: Filtering by property_type
-    if (filters.property_type) {
-      query.property_type = filters.property_type;
-    }
+    // Apply filters if needed
+    if (filters.property_type) query.property_type = filters.property_type;
 
-    // Add more filters as needed (e.g., price range, location)
-
-    // Fetch properties with pagination and populate related fields
+    // Fetch properties with pagination and populate seller and division info
     const properties = await Property.find(query)
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
-      .populate('seller')
-      .populate('land_media')
-      .populate({
-        path: 'division_info',
-        populate: {
-          path: 'parent_division',
-          model: 'Division',
-        },
-      })
+      .populate("seller")
+      .populate("division_info")
+      .populate("media") 
       .exec();
 
-    // Get total count for pagination metadata
     const totalProperties = await Property.countDocuments(query);
 
-    res.status(SUCCESS_CODE).json({
+    // Map through each property and transform the media field into an array of URLs
+    const transformedProperties = properties.map((property) => {
+      // Transform property into a plain JavaScript object
+      const propertyObject = property.toObject();
+
+      // Group media files into an array with their accessible URLs
+      propertyObject.media = propertyObject.media.map((media) => ({
+        ...media,
+        url: `/api/media/${media.file_id}`, // Access URL for the media
+      }));
+
+      return propertyObject;
+    });
+
+    // Send the response with the transformed properties and meta data
+    return res.status(SUCCESS_CODE).json({
       success: true,
-      data: properties,
+      data: transformedProperties,
       meta: {
         total: totalProperties,
         page: parseInt(page),
@@ -45,7 +48,7 @@ const getAllProperties = async (req, res) => {
       },
     });
   } catch (error) {
-    res
+    return res
       .status(INTERNAL_SERVER_ERROR_CODE)
       .json({ success: false, message: error.message });
   }
